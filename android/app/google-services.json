@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "624808739318",
+    "project_id": "game-a9b0d",
+    "storage_bucket": "game-a9b0d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624808739318:android:b8127b2c2708de3fa747d7",
+        "android_client_info": {
+          "package_name": "com.neoj.card_game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "624808739318-0665kno1d8f67qadpknktpapo5kjvcoi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSVJ1evSqaC13ZqInd-LABPWmEnQmkqZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "624808739318-0665kno1d8f67qadpknktpapo5kjvcoi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
