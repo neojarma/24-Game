@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:card_game/app/core/values/strings.dart';
 import 'package:card_game/app/data/models/player_model.dart';
+import 'package:card_game/app/data/provider/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../../data/enums/lobby_enums.dart';
@@ -10,8 +11,15 @@ class OnlineModeController extends GetxController {
   final textFieldController = TextEditingController();
   RxString usernameChangeStatus = ''.obs;
   // default username
-  // late final String _generatedUsername;
   final maxUsernameLength = 10;
+
+  @override
+  void onInit() {
+    String savedUsername = UserSharedPreferences.getUsername();
+    textFieldController.value = TextEditingValue(text: savedUsername);
+
+    super.onInit();
+  }
 
   Map<String, dynamic> arguments(Lobby lobby) {
     PlayerModel player =
@@ -51,7 +59,15 @@ class OnlineModeController extends GetxController {
     // change username
     textFieldController.value = TextEditingValue(text: userInputUsername);
     usernameChangeStatus.value = acceptedUsername;
+
+    // save user preferences
+    userPreferences(userInputUsername);
+
     // close keyboard
     FocusManager.instance.primaryFocus?.unfocus();
+  }
+
+  void userPreferences(String username) async {
+    await UserSharedPreferences.setUsername(username);
   }
 }

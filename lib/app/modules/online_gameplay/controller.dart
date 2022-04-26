@@ -47,8 +47,6 @@ class OnlineGameplayController extends GetxController with StateMixin {
 
     fetchData();
 
-    // _createDeckForGame();
-
     super.onInit();
   }
 

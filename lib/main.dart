@@ -1,3 +1,4 @@
+import 'package:card_game/app/data/provider/shared_preferences.dart';
 import 'package:card_game/app/routes/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,6 +7,8 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  await UserSharedPreferences.init();
 
   runApp(const MyApp());
 }
