@@ -6,3 +6,4 @@ const mainLogo = 'assets/images/main_logo.png';
 const miniIcon = 'assets/images/mini_icon.png';
 const solutionIcon = 'assets/images/solution_icon.png';
 const deleteIcon = 'assets/images/delete_icon.png';
+const backOfCard = 'assets/images/back_of_card.png';

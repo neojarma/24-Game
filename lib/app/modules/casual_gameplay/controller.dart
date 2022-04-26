@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_final_fields
-
 import 'package:card_game/app/core/values/strings.dart';
 import 'package:card_game/app/data/enums/game_enums.dart';
 import 'package:card_game/app/data/models/solution_model.dart';
@@ -21,7 +20,7 @@ class GameplayController extends GetxController with StateMixin {
   // keep track user input
   RxList<String> _userAnswer = [''].obs;
   // keep track user selected card
-  RxList<String> _selectedCardId = [''].obs;
+  RxList<String> selectedCardId = [''].obs;
 
   // keep track timer in milliSecond
   RxInt _timeValue = 0.obs;
@@ -78,7 +77,7 @@ class GameplayController extends GetxController with StateMixin {
     // user click more than 1 card in a row
     if (valid) return;
 
-    _selectedCardId.add(value);
+    selectedCardId.add(value);
   }
 
   void deleteUserAnswer() {
@@ -97,21 +96,21 @@ class GameplayController extends GetxController with StateMixin {
     }
 
     // delete the stats of array cards
-    String cardId = _selectedCardId[_selectedCardId.length - 1];
+    String cardId = selectedCardId[selectedCardId.length - 1];
     _changeCardVisibilityById(cardId, true);
-    _selectedCardId.removeLast();
+    selectedCardId.removeLast();
     _userAnswer.removeLast();
   }
 
   void handleUserAnswer() async {
     // user must input valid value, and use all the cards
     if (_prevPageArgs == GameMode.fourCardMode) {
-      if (_userAnswer.length == 1 || _selectedCardId.length != 5) {
+      if (_userAnswer.length == 1 || selectedCardId.length != 5) {
         _userAnswerStatus.value = uncompletedOperations;
         return;
       }
     } else {
-      if (_userAnswer.length == 1 || _selectedCardId.length != 7) {
+      if (_userAnswer.length == 1 || selectedCardId.length != 7) {
         _userAnswerStatus.value = uncompletedOperations;
         return;
       }
@@ -240,7 +239,7 @@ class GameplayController extends GetxController with StateMixin {
     _userAnswerStatus.value = '';
 
     // reset clickedCardId list
-    _selectedCardId.value = [''];
+    selectedCardId.value = [''];
     refresh();
   }
 

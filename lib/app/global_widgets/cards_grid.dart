@@ -1,3 +1,6 @@
+import 'dart:math';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:card_game/app/core/values/assets.dart';
 import 'package:card_game/app/core/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -40,6 +43,11 @@ class CardsGrid extends StatelessWidget {
               .map<GestureDetector>(
                 (card) => GestureDetector(
                   onTap: () {
+                    // prevent user from input same card
+                    if (controller.selectedCardId.contains(card['id'])) {
+                      return;
+                    }
+
                     // change the visibility of the card to false
                     card['visible'] =
                         controller.setUserAnswer(card['value'].toString());
@@ -47,23 +55,68 @@ class CardsGrid extends StatelessWidget {
                     // add clicked card id to list, to keep track remaining card
                     controller.addSelectedCard(card['id'], card['visible']);
                   },
-                  child: AnimatedOpacity(
-                    duration: const Duration(milliseconds: 170),
-                    opacity: (card['visible'] == true) ? 1 : 0,
-                    child: Image.network(
-                      card['image'],
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return const SpinKitPulse(
-                          color: Colors.white,
-                          size: 30,
-                        );
-                      },
-                    ),
+                  child: AnimatedSwitcher(
+                    switchInCurve: Curves.easeInOut,
+                    switchOutCurve: Curves.easeInOut.flipped,
+                    transitionBuilder: __transitionBuilder,
+                    layoutBuilder: (widget, list) =>
+                        Stack(children: [widget!, ...list]),
+                    duration: const Duration(milliseconds: 500),
+                    child: card['visible'] ? frontCard(card) : backCard(),
                   ),
                 ),
               )
               .toList(),
+        ),
+      ),
+    );
+  }
+
+  Widget __transitionBuilder(Widget widget, Animation<double> animation) {
+    final rotateAnim = Tween(begin: pi, end: 0.0).animate(animation);
+    return AnimatedBuilder(
+      animation: rotateAnim,
+      child: widget,
+      builder: (context, widget) {
+        final isUnder = (const ValueKey(true) != widget?.key);
+        var tilt = ((animation.value - 0.5).abs() - 0.5) * 0.003;
+        tilt *= isUnder ? -1.0 : 1.0;
+        final value =
+            isUnder ? min(rotateAnim.value, pi / 2) : rotateAnim.value;
+        return Transform(
+          transform: (Matrix4.rotationY(value)..setEntry(3, 0, tilt)),
+          child: widget,
+          alignment: Alignment.center,
+        );
+      },
+    );
+  }
+
+  Widget backCard() {
+    return Center(
+      key: const ValueKey('Front'),
+      child: Container(
+        decoration: BoxDecoration(boxShadow: const [
+          BoxShadow(
+            color: Colors.white,
+            // offset: Offset(-1.5, 1.5),
+            blurRadius: 1.5,
+            spreadRadius: 2,
+          )
+        ], borderRadius: BorderRadius.circular(5)),
+        child: Image.asset(backOfCard),
+      ),
+    );
+  }
+
+  Widget frontCard(Map<String, dynamic> card) {
+    return Center(
+      key: const ValueKey('Back'),
+      child: CachedNetworkImage(
+        imageUrl: card['image'],
+        placeholder: (context, string) => const SpinKitPulse(
+          color: Colors.white,
+          size: 30,
         ),
       ),
     );

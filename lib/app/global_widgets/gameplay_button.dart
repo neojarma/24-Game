@@ -27,7 +27,7 @@ class GameplayButton extends StatelessWidget {
           width: 30,
         ),
         SmallCustomButton(
-          title: 'Clear',
+          title: 'Reset',
           color: Colors.white,
           // color: kGreenColor,
           function: controller.reset,

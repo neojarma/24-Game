@@ -25,7 +25,7 @@ class OnlineGameplayController extends GetxController with StateMixin {
   // keep track user input
   RxList<String> _userAnswer = [''].obs;
   // keep track user selected card
-  RxList<String> _selectedCardId = [''].obs;
+  RxList<String> selectedCardId = [''].obs;
 
   // keep track timer in milliSecond
   RxInt _timeValue = 0.obs;
@@ -93,9 +93,9 @@ class OnlineGameplayController extends GetxController with StateMixin {
     }
 
     // delete the stats of array cards
-    String cardId = _selectedCardId[_selectedCardId.length - 1];
+    String cardId = selectedCardId[selectedCardId.length - 1];
     _changeCardVisibilityById(cardId, true);
-    _selectedCardId.removeLast();
+    selectedCardId.removeLast();
     _userAnswer.removeLast();
   }
 
@@ -126,7 +126,7 @@ class OnlineGameplayController extends GetxController with StateMixin {
 
   void handleUserAnswer() async {
     // user must input valid value, and use all the cards
-    if (_userAnswer.length == 1 || _selectedCardId.length != 5) {
+    if (_userAnswer.length == 1 || selectedCardId.length != 5) {
       _userAnswerStatus.value = uncompletedOperations;
       return;
     }
@@ -159,7 +159,7 @@ class OnlineGameplayController extends GetxController with StateMixin {
     _userAnswerStatus.value = '';
 
     // reset clickedCardId list
-    _selectedCardId.value = [''];
+    selectedCardId.value = [''];
     refresh();
   }
 
@@ -168,7 +168,7 @@ class OnlineGameplayController extends GetxController with StateMixin {
     // user click more than 1 card in a row
     if (valid) return;
 
-    _selectedCardId.add(value);
+    selectedCardId.add(value);
   }
 
   bool setUserAnswer(String input) {
@@ -238,6 +238,7 @@ class OnlineGameplayController extends GetxController with StateMixin {
       middleText: exitConfirmation,
       textConfirm: dialogConfirm,
       textCancel: dialogCancel,
+      confirmTextColor: Colors.white,
       onConfirm: () => FirebaseProvider.gameEnded(roomId, opponentName),
       // continue the timer
       onCancel: () => _controllerTime.onExecute.add(StopWatchExecute.start),
