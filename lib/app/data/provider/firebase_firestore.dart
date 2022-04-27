@@ -54,10 +54,22 @@ abstract class FirebaseProvider {
 
   static void gameEnded(String roomId, String winner) async {
     await lobbyStream.doc(roomId).update(
-      {'game_status': 'end', 'winner': winner},
+      {'game_status': 'end', 'winner': winner, 'isRematch': false},
     ).catchError(
       (err) => print(err),
     );
+  }
+
+  static void clearRematch(
+      String roomId, String player1, String player2) async {
+    await lobbyStream.doc(roomId).update({
+      player1: FieldValue.delete(),
+      player2: FieldValue.delete(),
+    });
+  }
+
+  static void playerLeftRematch(String roomId, String player) async {
+    await lobbyStream.doc(roomId).update({player: 'left'});
   }
 
   static void deleteRoomById(String roomId) async {
@@ -69,5 +81,22 @@ abstract class FirebaseProvider {
       'player_two_id': FieldValue.delete(),
       'player_two_username': FieldValue.delete()
     }).catchError((err) => print(err));
+  }
+
+  static void playerReadyToRematch(
+      String roomId, String player, List<dynamic>? newCards) async {
+    if (newCards != null) {
+      await lobbyStream.doc(roomId).update(
+        {player: 'rematch', 'cards': newCards},
+      );
+    }
+
+    await lobbyStream.doc(roomId).update({player: 'rematch'});
+  }
+
+  static void rematch(String roomId) async {
+    await lobbyStream
+        .doc(roomId)
+        .update({'isRematch': true, 'game_status': 'start'});
   }
 }

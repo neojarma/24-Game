@@ -54,7 +54,7 @@ class OnlineGameplayPage extends GetView<OnlineGameplayController> {
                     CardsGrid(
                       controller: controller,
                       gridCount: 2,
-                      cards: controller.onlineBattle.cards,
+                      cards: controller.cards,
                     ),
                     UserAnswerWidget(controller: controller),
                   ],

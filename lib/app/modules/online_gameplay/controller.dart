@@ -12,7 +12,7 @@ import '../../routes/pages.dart';
 
 class OnlineGameplayController extends GetxController with StateMixin {
   final Map<String, dynamic> prevArgs = Get.arguments;
-  late final OnlineBattle onlineBattle;
+  // late final OnlineBattle onlineBattle;
 
   late final String roomId;
   late final String opponentName;
@@ -47,6 +47,10 @@ class OnlineGameplayController extends GetxController with StateMixin {
 
     fetchData();
 
+    change('waiting', status: RxStatus.loading());
+
+    _initializeTimeController();
+
     super.onInit();
   }
 
@@ -66,7 +70,13 @@ class OnlineGameplayController extends GetxController with StateMixin {
       (_) => Get.offNamedUntil(
         Routes.RESULT,
         ModalRoute.withName(Routes.GAME_MODE),
-        arguments: {'is_winning': isWinning, 'finish_time': time},
+        arguments: {
+          'is_winning': isWinning,
+          'finish_time': time,
+          'room_id': roomId,
+          'current_player': currentPlayer,
+          'opponent': opponentName
+        },
       ),
     );
   }
@@ -100,7 +110,7 @@ class OnlineGameplayController extends GetxController with StateMixin {
   }
 
   void _changeCardVisibilityById(String cardId, bool condition) {
-    for (var card in onlineBattle.cards) {
+    for (var card in cards) {
       if (card['id'] == cardId) {
         card['visible'] = condition;
         refresh();
@@ -148,7 +158,7 @@ class OnlineGameplayController extends GetxController with StateMixin {
 
   void reset() {
     // change all the card to visible
-    for (var card in onlineBattle.cards) {
+    for (var card in cards) {
       card['visible'] = true;
     }
 
@@ -213,6 +223,7 @@ class OnlineGameplayController extends GetxController with StateMixin {
 
     // start timer
     _controllerTime.onExecute.add(StopWatchExecute.start);
+    change('OK', status: RxStatus.success());
   }
 
   // fetch data from firebase
@@ -220,12 +231,18 @@ class OnlineGameplayController extends GetxController with StateMixin {
     final data = await FirebaseProvider.fetchLobby(roomId);
     final json = data.data();
 
-    json!['cards'].forEach((card) => cards.add(card));
+    List<Map<String, dynamic>> tempListJson = [];
+    json!['cards'].forEach((card) => tempListJson.add(card));
 
-    onlineBattle = OnlineBattle.fromJson(json, cards);
+    var onlineBattle = OnlineBattle.fromJson(json, tempListJson);
 
-    change('OK', status: RxStatus.success());
-    _initializeTimeController();
+    var templist = onlineBattle.cards;
+    for (var item in templist) {
+      cards.add(item);
+    }
+
+    // _initializeTimeController();
+    // change('OK', status: RxStatus.success());
   }
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> gameStream() {

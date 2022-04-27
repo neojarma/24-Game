@@ -10,6 +10,8 @@ import 'package:card_game/app/modules/online_gameplay/binding.dart';
 import 'package:card_game/app/modules/online_gameplay/page.dart';
 import 'package:card_game/app/modules/online_mode/binding.dart';
 import 'package:card_game/app/modules/online_mode/page.dart';
+import 'package:card_game/app/modules/rematch/binding.dart';
+import 'package:card_game/app/modules/rematch/page.dart';
 import 'package:card_game/app/modules/result_online_game/binding.dart';
 import 'package:card_game/app/modules/result_online_game/page.dart';
 import 'package:card_game/app/modules/waiting/binding.dart';
@@ -70,6 +72,11 @@ abstract class AppPages {
           name: Routes.RESULT,
           page: () => const ResultPage(),
           binding: ResultBinding(),
+        ),
+        GetPage(
+          name: Routes.REMATCH,
+          page: () => const RematchPage(),
+          binding: RematchBinding(),
         )
       ],
     )

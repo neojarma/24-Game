@@ -21,3 +21,5 @@ const winDesc = 'You\'ve Won the Game';
 const loseTitle = 'Oh No!';
 const loseDesc = 'Your opponent has won the game';
 const gameStart = 'The Game Has Started';
+const rematchDesc = 'Your opponent challenge you again, accept ?';
+const rematchTitle = 'Rematch !';
