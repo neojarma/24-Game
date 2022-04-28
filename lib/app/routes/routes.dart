@@ -12,4 +12,5 @@ abstract class Routes {
   static const GAME_MODE = '/game-mode';
   static const RESULT = '/result';
   static const REMATCH = '/rematch';
+  static const SOLVER = '/solver';
 }

@@ -26,7 +26,16 @@ class DashboardPage extends GetView<DashboardController> {
                 color: kSemiBlackColor,
                 title: 'Play Game',
                 textStyle: kButtonTextStyle,
-                function: controller.handlePage,
+                function: controller.gameModePage,
+              ),
+              const SizedBox(
+                height: 24.0,
+              ),
+              LargeCustomButton(
+                color: kSemiBlackColor,
+                title: 'Solver',
+                textStyle: kButtonTextStyle,
+                function: controller.solverPage,
               ),
               const SizedBox(
                 height: 24.0,

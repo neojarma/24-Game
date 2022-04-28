@@ -14,6 +14,8 @@ import 'package:card_game/app/modules/rematch/binding.dart';
 import 'package:card_game/app/modules/rematch/page.dart';
 import 'package:card_game/app/modules/result_online_game/binding.dart';
 import 'package:card_game/app/modules/result_online_game/page.dart';
+import 'package:card_game/app/modules/solver/binding.dart';
+import 'package:card_game/app/modules/solver/page.dart';
 import 'package:card_game/app/modules/waiting/binding.dart';
 import 'package:get/get.dart';
 
@@ -74,9 +76,16 @@ abstract class AppPages {
           binding: ResultBinding(),
         ),
         GetPage(
+          transition: Transition.cupertino,
           name: Routes.REMATCH,
           page: () => const RematchPage(),
           binding: RematchBinding(),
+        ),
+        GetPage(
+          transition: Transition.cupertino,
+          name: Routes.SOLVER,
+          page: () => const SolverPage(),
+          binding: SolverBinding(),
         )
       ],
     )

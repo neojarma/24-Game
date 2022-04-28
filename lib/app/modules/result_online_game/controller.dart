@@ -88,6 +88,13 @@ class ResultController extends GetxController {
           'stream': watchRematch(),
         });
 
+    var newCards = await requestDeck();
+
+    // add ready player status
+    FirebaseProvider.playerReadyToRematch(roomId, currentPlayer, newCards);
+  }
+
+  Future<List<Map<String, dynamic>>> requestDeck() async {
     // request deck
     var deck = await CardProvider.getDeck(4);
     List<int> numbers = [];
@@ -95,14 +102,13 @@ class ResultController extends GetxController {
       numbers.add(element['value']);
     }
 
+    // guaranted that the question has an answer
     var solution = await SolutionProvider.getSolution(numbers);
     if (!solution.solution) {
-      handleRematch();
+      requestDeck();
     }
-    var newCards = deck.listOfCards;
 
-    // add ready player status
-    FirebaseProvider.playerReadyToRematch(roomId, currentPlayer, newCards);
+    return deck.listOfCards;
   }
 
   void handleRematch() async {
