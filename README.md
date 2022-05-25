@@ -71,10 +71,10 @@ You have to make the number **24** from the given number in application. You can
 10. [Flutter Spinkit](https://pub.dev/packages/flutter_spinkit)
 
 ## How To Run
-> ### git clone https://github.com/neojarma/24-Game.git
+> git clone https://github.com/neojarma/24-Game.git
 
-> ### cd 24-Game
+> cd 24-Game
 
-> ### flutter packages get
+> flutter packages get
 
-> ### flutter run
+> flutter run
