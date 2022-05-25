@@ -28,7 +28,7 @@ class RematchController extends GetxController {
   }
 
   void redirectToMainPage() {
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(
         const Duration(milliseconds: 1500),
         () => Get.offNamedUntil(
@@ -41,7 +41,7 @@ class RematchController extends GetxController {
 
   void handleRematch() {
     // redirect
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       // update lobby information
       FirebaseProvider.rematch(roomId);
 

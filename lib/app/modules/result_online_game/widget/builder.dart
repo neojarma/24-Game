@@ -64,7 +64,7 @@ class ResultBuilder extends GetView<ResultController> {
                         snapdata!.get(controller.opponent);
 
                     if (opponentStatus == 'rematch') {
-                      WidgetsBinding.instance?.addPostFrameCallback((_) {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
                         Get.defaultDialog(
                           barrierDismissible: false,
                           title: rematchTitle,

@@ -66,7 +66,7 @@ class OnlineGameplayController extends GetxController with StateMixin {
 
     final isWinning = (winner == opponentName) ? false : true;
 
-    WidgetsBinding.instance?.addPostFrameCallback(
+    WidgetsBinding.instance.addPostFrameCallback(
       (_) => Get.offNamedUntil(
         Routes.RESULT,
         ModalRoute.withName(Routes.GAME_MODE),

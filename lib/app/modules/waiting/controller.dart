@@ -13,7 +13,7 @@ class WaitingController extends GetxController {
   }
 
   void redirectToGameplay(String opponent, String currentPlayer) {
-    WidgetsBinding.instance?.addPostFrameCallback(
+    WidgetsBinding.instance.addPostFrameCallback(
       (_) => Get.toNamed(
         Routes.ONLINE_GAMEPLAY,
         arguments: {
@@ -26,7 +26,7 @@ class WaitingController extends GetxController {
   }
 
   void handleRoomDeleted() {
-    WidgetsBinding.instance?.addPostFrameCallback(
+    WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         Future.delayed(const Duration(seconds: 2), () {
           Get.offAndToNamed(

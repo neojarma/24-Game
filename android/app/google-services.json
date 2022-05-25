@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "624808739318",
-    "project_id": "game-a9b0d",
-    "storage_bucket": "game-a9b0d.appspot.com"
+    "project_number": "534551386020",
+    "project_id": "game-16a9a",
+    "storage_bucket": "game-16a9a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:624808739318:android:b8127b2c2708de3fa747d7",
+        "mobilesdk_app_id": "1:534551386020:android:b0b38f2288376c18e01331",
         "android_client_info": {
           "package_name": "com.neoj.card_game"
         }
       },
       "oauth_client": [
         {
-          "client_id": "624808739318-0665kno1d8f67qadpknktpapo5kjvcoi.apps.googleusercontent.com",
+          "client_id": "534551386020-cvmgq2nt694p43o1kd6d4qmimbco7aej.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBSVJ1evSqaC13ZqInd-LABPWmEnQmkqZA"
+          "current_key": "AIzaSyDhcFWFnxPyuJfdnXzJLBsFr43gfywmnyE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "624808739318-0665kno1d8f67qadpknktpapo5kjvcoi.apps.googleusercontent.com",
+              "client_id": "534551386020-cvmgq2nt694p43o1kd6d4qmimbco7aej.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

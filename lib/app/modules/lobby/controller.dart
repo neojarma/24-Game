@@ -48,7 +48,7 @@ class LobbyController extends GetxController {
   }
 
   void changeOpponenFoundValue(String status) {
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       opponentFound.value = status;
     });
   }
